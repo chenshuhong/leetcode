@@ -30,3 +30,16 @@ Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
 Coud you solve it without converting the integer to a string?
 
 > 不要转换成字符串能否解决
+
+我们先用转换成字符串方案
+
+```js
+var isPalindrome = function(x) {
+  if (x<0)
+    return false
+  let xArray = x.toString().split('')
+  xArray.reverse()
+  let palindromeX=+xArray.join('')
+  return x === palindromeX
+};
+```
