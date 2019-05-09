@@ -93,3 +93,4 @@ var isPalindrome3 = function(x) {
 此时发现不满足x>revertedNumber，就可以判断是否回文了
 
 注意当数字个数为偶数时，会出现中间数，所以要除以10再判断
+
