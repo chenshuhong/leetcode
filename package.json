@@ -1,0 +1,25 @@
+{
+  "name": "leetcode",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "jest": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenshuhong/leetcode.git"
+  },
+  "keywords": [
+    "leetcode"
+  ],
+  "author": "shuhong.cheng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chenshuhong/leetcode/issues"
+  },
+  "homepage": "https://github.com/chenshuhong/leetcode#readme",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
+}
