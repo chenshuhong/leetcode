@@ -1,26 +1,23 @@
 /**
- * @param {number[]} nums
- * @param {number} target
+ * @param {string} haystack
+ * @param {string} needle
  * @return {number}
  */
-var searchInsert = function(nums, target) {
-  if (nums.length === 0){
+var strStr = function(haystack, needle) {
+  if (!needle)
     return 0
-  }
-  let headIndex=0,tailIndex=nums.length-1,index
-  while (headIndex<=tailIndex){
-    index = parseInt((tailIndex+headIndex)/2)
-    let value = nums[index]
-    if (value === target){
-      return index
-    } else if (value>target) {
-      tailIndex = index - 1
-    } else {
-      headIndex = index +1
+  let nLength = needle.length
+  let hLength = haystack.length-nLength+1
+  for (let i=0;i<hLength;i++){
+    for (let j=0;j<nLength;j++){
+      if (haystack[i+j]!==needle[j]) {
+        break
+      }else if (j===nLength-1){
+        return i
+      }
     }
   }
-  return nums[index]>target?index:index+1
+  return -1
 };
 
-
-console.log(searchInsert([1,3,5,6],7))
+console.log(strStr('hello','el'))

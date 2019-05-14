@@ -1,50 +1,60 @@
-Implement [strStr()](http://www.cplusplus.com/reference/cstring/strstr/).
+Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
 
-Return the index of the first occurrence of needle in haystack, or **-1** if needle is not part of haystack.
+You may assume no duplicates in the array.
 
 **Example 1:**
 
 ```
-Input: haystack = "hello", needle = "ll"
+Input: [1,3,5,6], 5
 Output: 2
 ```
 
 **Example 2:**
 
 ```
-Input: haystack = "aaaaa", needle = "bba"
-Output: -1
+Input: [1,3,5,6], 2
+Output: 1
 ```
 
-**Clarification:**
-
-What should we return when `needle` is an empty string? This is a great question to ask during an interview.
-
-For the purpose of this problem, we will return 0 when `needle` is an empty string. This is consistent to C's [strstr()](http://www.cplusplus.com/reference/cstring/strstr/) and Java's [indexOf()](https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#indexOf(java.lang.String)).
-
-第一版BF算法,暴力搜索，不解释
+**Example 3:**
 
 ```
+Input: [1,3,5,6], 7
+Output: 4
+```
+
+**Example 4:**
+
+```
+Input: [1,3,5,6], 0
+Output: 0
+```
+
+二分查找：
+
+```js
 /**
- * @param {string} haystack
- * @param {string} needle
+ * @param {number[]} nums
+ * @param {number} target
  * @return {number}
  */
-var strStr = function(haystack, needle) {
-  if (!needle)
+var searchInsert = function(nums, target) {
+  if (nums.length === 0){
     return 0
-  let nLength = needle.length
-  let hLength = haystack.length-nLength+1
-  for (let i=0;i<hLength;i++){
-    for (let j=0;j<nLength;j++){
-      if (haystack[i+j]!==needle[j]) {
-        break
-      }else if (j===nLength-1){
-        return i
-      }
+  }
+  let headIndex=0,tailIndex=nums.length-1,index
+  while (headIndex<=tailIndex){
+    index = parseInt((tailIndex+headIndex)/2)
+    let value = nums[index]
+    if (value === target){
+      return index
+    } else if (value>target) {
+      tailIndex = index - 1
+    } else {
+      headIndex = index +1
     }
   }
-  return -1
+  return nums[index]>target?index:index+1
 };
 ```
 
