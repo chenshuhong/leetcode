@@ -1,16 +1,35 @@
-Given an integer array `nums`, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+Given a string *s* consists of upper/lower-case alphabets and empty space characters `' '`, return the length of last word in the string.
+
+If the last word does not exist, return 0.
+
+**Note:** A word is defined as a character sequence consists of non-space characters only.
 
 **Example:**
 
 ```
-Input: [-2,1,-3,4,-1,2,1,-5,4],
-Output: 6
-Explanation: [4,-1,2,1] has the largest sum = 6.
+Input: "Hello World"
+Output: 5
 ```
 
-**Follow up:**
+先把字符串去除前后空格，然后从后遍历，找到非英文单词，当没找到时染回字符串长度
 
-If you have figured out the O(*n*) solution, try coding another solution using the divide and conquer approach, which is more subtle.
-
-Accepted
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLastWord = function(s) {
+  s = s.trim()
+  if (!s){
+    return 0
+  }
+  for (let length = s.length,i=length-1;i>=0;i--){
+    let chatCode = s.charCodeAt(i)
+    if (!((chatCode>=97&&chatCode<=122)||(chatCode>=65&&chatCode<=90))){
+      return length-1-i
+    }
+  }
+  return s.length
+};
+```
 
