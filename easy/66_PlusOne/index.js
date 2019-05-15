@@ -5,7 +5,6 @@
 var plusOne = function(digits) {
   let resultDigits = []
   digits.reduceRight((pre,cur,index,array)=>{
-    debugger
     let result = (cur+pre)%10
     resultDigits.unshift(result)
     return pre+cur>=10?1:0
