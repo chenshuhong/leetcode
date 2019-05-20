@@ -40,3 +40,76 @@ circularQueue.Rear();  // return 4
 - All values will be in the range of [0, 1000].
 - The number of operations will be in the range of [1, 1000].
 - Please do not use the built-in Queue library.
+
+
+
+注意循环队列数组存储会比普通顺序队列多浪费一个数组的存储空间 ，所以存储的数组会比实际存放多一个，队空条件：tail===head，队满条件：(this.tail+1)%this.length === this.head
+
+```js
+/**
+ * Initialize your data structure here. Set the size of the queue to be k.
+ * @param {number} k
+ */
+var MyCircularQueue = function(k) {
+  this.array = []
+  this.length = k + 1
+  this.head = this.tail = 0
+};
+
+/**
+ * Insert an element into the circular queue. Return true if the operation is successful.
+ * @param {number} value
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.enQueue = function(value) {
+  if (this.isFull())
+    return false
+  this.array[this.tail] = value
+  this.tail = (this.tail+1)%this.length
+  return true
+};
+
+/**
+ * Delete an element from the circular queue. Return true if the operation is successful.
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.deQueue = function() {
+  if (this.isEmpty())
+    return false
+  this.head = (this.head+1)%this.length
+  return true
+};
+
+/**
+ * Get the front item from the queue.
+ * @return {number}
+ */
+MyCircularQueue.prototype.Front = function() {
+  return this.isEmpty()?-1:this.array[this.head]
+};
+
+/**
+ * Get the last item from the queue.
+ * @return {number}
+ */
+MyCircularQueue.prototype.Rear = function() {
+  return this.isEmpty()?-1:this.array[(this.tail+this.length-1)%this.length]
+};
+
+/**
+ * Checks whether the circular queue is empty or not.
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.isEmpty = function() {
+  return this.head === this.tail
+};
+
+/**
+ * Checks whether the circular queue is full or not.
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.isFull = function() {
+  return (this.tail+1)%this.length === this.head
+};
+```
+
