@@ -4,7 +4,7 @@ let ListNode = require('../../datastruct/ListNode')
  */
 var MyLinkedList = function() {
   //哨兵
-  this.headNode = new ListNode(null)
+  this.headNode = new ListNode(-1)
 };
 
 /**
@@ -13,12 +13,13 @@ var MyLinkedList = function() {
  * @return {number}
  */
 MyLinkedList.prototype.get = function(index) {
+  index=index+1
   let listNode = this.headNode
-  while (listNode&&!index){
+  while (listNode.next&&index){
     listNode = listNode.next
     index--
   }
-  return index?-1:listNode.value
+  return index?-1:listNode.val
 };
 
 /**
@@ -27,11 +28,7 @@ MyLinkedList.prototype.get = function(index) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtHead = function(val) {
-  let insertNode = new ListNode(val)
-  if (this.headNode){
-    insertNode.next = this.headNode
-  }
-  this.headNode = insertNode
+  this.addAtIndex(0,val)
 };
 
 /**
@@ -40,16 +37,7 @@ MyLinkedList.prototype.addAtHead = function(val) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtTail = function(val) {
-  let insertNode = new ListNode(val)
-  let listNode = this.headNode
-  if (!listNode){
-    this.headNode = insertNode
-    return
-  }
-  while (listNode.next){
-    listNode = listNode.next
-  }
-  listNode.next = insertNode
+ this.addAtIndex(-1,val)
 };
 
 /**
@@ -68,6 +56,8 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
   if (!index){
     insertNode.next = listNode.next
     listNode.next = insertNode
+  }else if (index<0) {
+    listNode.next = insertNode
   }
 };
 
@@ -77,7 +67,14 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
  * @return {void}
  */
 MyLinkedList.prototype.deleteAtIndex = function(index) {
-
+  let listNode = this.headNode
+  while (listNode.next&&index){
+    listNode = listNode.next
+    index--
+  }
+  if (!index){
+    listNode.next = listNode.next?listNode.next.next:null
+  }
 };
 
 /**
@@ -89,3 +86,9 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
  * obj.addAtIndex(index,val)
  * obj.deleteAtIndex(index)
  */
+
+let l = new MyLinkedList()
+l.addAtHead(1)
+l.addAtTail(3)
+l.addAtIndex(1,2)
+console.log(JSON.stringify(l))
