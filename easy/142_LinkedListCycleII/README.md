@@ -45,3 +45,25 @@ Explanation: There is no cycle in the linked list.
 **Follow up**:
 Can you solve it without using extra space?
 
+不考虑空间复杂度，用哈希表来查找
+
+```js
+
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var detectCycle = function(head) {
+  let nodeSet = new Set()
+  while (head){
+    if(nodeSet.has(head)){
+      return head
+    }else {
+      nodeSet.add(head)
+    }
+    head = head.next
+  }
+  return null    
+};
+```
+
