@@ -13,14 +13,14 @@ let ListNode = require('../../datastruct/ListNode')
 var reverseList = function(head) {
   if (!head||!head.next)
     return head
-  let listNode = head
+  let oldHead = head
   let newHead = head
-  while (listNode.next){
-    newHead = listNode.next
-    listNode.next = listNode.next.next
-    newHead.next = listNode
+  while (oldHead.next){
+    let tmpNode = oldHead.next
+    oldHead.next = oldHead.next.next
+    tmpNode.next = newHead
+    newHead = tmpNode
   }
-  console.log(newHead)
   return newHead
 };
 
@@ -30,7 +30,8 @@ l.next.next = new ListNode(3)
 l.next.next.next = new ListNode(4)
 l.next.next.next.next = new ListNode(5)
 
-console.log(reverseList(l))
+let l2 = reverseList(l)
+console.log(JSON.stringify(l2))
 
 
 
