@@ -35,22 +35,33 @@ hashSet.contains(2);    // returns false (already removed)
 - The number of operations will be in the range of `[1, 10000]`.
 - Please do not use the built-in HashSet library.
 
-没什么好说的,show me the code
+注意，要理解hash表的原理，不要用内建map
 
 ```js
 /**
  * Initialize your data structure here.
  */
 var MyHashSet = function() {
-  this.set = {}
+  this.set = []
 };
+
+function hash(key){
+  return key%100
+}
 
 /**
  * @param {number} key
  * @return {void}
  */
 MyHashSet.prototype.add = function(key) {
-  this.set[key] = true
+  let hashKey = hash(key)
+  if (this.set[hashKey]){
+    if (this.set[hashKey].indexOf(key)==-1) {
+      this.set[hashKey].push(key)
+    }
+  } else {
+    this.set[hashKey]=[key]
+  }
 };
 
 /**
@@ -58,7 +69,13 @@ MyHashSet.prototype.add = function(key) {
  * @return {void}
  */
 MyHashSet.prototype.remove = function(key) {
-  this.set[key] = false
+  let bucket = this.set[hash(key)]
+  if (bucket){
+    let removeIndex = bucket.indexOf(key)
+    if (removeIndex!==-1){
+      bucket.splice(removeIndex,1)
+    }
+  }
 };
 
 /**
@@ -67,16 +84,9 @@ MyHashSet.prototype.remove = function(key) {
  * @return {boolean}
  */
 MyHashSet.prototype.contains = function(key) {
-  return !!this.set[key]
+  let bucket = this.set[hash(key)]
+  return bucket ? -1 !== bucket.indexOf(key) : false
 };
-
-/**
- * Your MyHashSet object will be instantiated and called as such:
- * var obj = new MyHashSet()
- * obj.add(key)
- * obj.remove(key)
- * var param_3 = obj.contains(key)
- */
 
 ```
 
