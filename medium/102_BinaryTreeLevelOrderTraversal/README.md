@@ -24,3 +24,46 @@ return its level order traversal as:
   [15,7]
 ]
 ```
+
+利用一个队列来实现，注意记录下当前节点的层次
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrder = function(root) {
+  let array = []
+  let queue = new Queue()
+  if (root){
+    queue.push(root)
+    root.level = 0
+  }
+  while (root){
+    if (root.left){
+      root.left.level = root.level+1
+      queue.push(root.left)
+    }
+    if (root.right){
+      root.right.level = root.level+1
+      queue.push(root.right)
+    }
+    if(array[root.level]){
+      array[root.level].push(root.val)
+    }else {
+      array[root.level] = [root.val]
+    }
+    queue.pop()
+    root = queue.head()
+  }
+  return array
+};
+```
+
