@@ -1,4 +1,5 @@
 let Stack = require('../../datastruct/Stack')
+let TreeNode = require('../../datastruct/TreeNode')
 /**
  * Definition for a binary tree node.
  * function TreeNode(val) {
@@ -30,13 +31,25 @@ var inorderTraversal2 = function(root) {
       stack.push(treeNode.left)
     }else {
       array.push(treeNode.val)
+      stack.pop()
       if (treeNode.right&&!treeNode.rightVisited){
         treeNode.rightVisited = true
         stack.push(treeNode.right)
-      } else {
-        stack.pop()
       }
     }
   }
   return array
 };
+
+
+let treeNode= new TreeNode(1)
+treeNode.left = new TreeNode(2)
+treeNode.left.left = new TreeNode(4)
+treeNode.left.right = new TreeNode(5)
+treeNode.right = new TreeNode(3)
+treeNode.right.left = new TreeNode(6)
+treeNode.right.right = new TreeNode(7)
+
+
+console.log(inorderTraversal2(treeNode))
+
