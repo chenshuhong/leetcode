@@ -1,4 +1,4 @@
-let inorderTraversa = require('../../medium/94_BinaryTreeInorderTraversal').inorderTraversal1
+let inorderTraversa = require('../94_BinaryTreeInorderTraversal/index').inorderTraversal1
 /**
  * Definition for a binary tree node.
  * function TreeNode(val) {
