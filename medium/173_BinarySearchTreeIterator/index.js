@@ -1,3 +1,4 @@
+let inorderTraversa = require('../94_BinaryTreeInorderTraversal/index').inorderTraversal1
 /**
  * Definition for a binary tree node.
  * function TreeNode(val) {
@@ -9,7 +10,8 @@
  * @param {TreeNode} root
  */
 var BSTIterator = function(root) {
-
+  this.order = inorderTraversa(root)
+  this.index = 0
 };
 
 /**
@@ -17,7 +19,7 @@ var BSTIterator = function(root) {
  * @return {number}
  */
 BSTIterator.prototype.next = function() {
-
+  return this.order[this.index++]
 };
 
 /**
@@ -25,7 +27,7 @@ BSTIterator.prototype.next = function() {
  * @return {boolean}
  */
 BSTIterator.prototype.hasNext = function() {
-
+  return this.order.length>this.index
 };
 
 /**
