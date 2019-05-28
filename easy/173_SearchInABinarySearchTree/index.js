@@ -21,3 +21,5 @@ var searchBST = function(root, val) {
     return searchBST(root.right,val)
   }
 };
+
+module.exports = searchBST
