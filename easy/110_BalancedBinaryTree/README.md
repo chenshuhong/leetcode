@@ -37,3 +37,35 @@ Given the following tree `[1,2,2,3,3,null,null,4,4]`:
 ```
 
 Return false.
+
+
+
+自顶向下，递归求得每个节点的左右子树高度，不过复杂度挺高，达到O（n^2）
+
+```js
+function depth(root){
+  if (!root)
+    return 0;
+  return Math.max(depth(root.left), depth (root.right)) + 1;
+}
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isBalanced = function(root) {
+  if (!root)
+    return true;
+  let leftDepth=depth(root.left);
+  let rightDepth=depth(root.right);
+  return Math.abs(leftDepth - rightDepth) <= 1 && isBalanced(root.left) && isBalanced(root.right);
+};
+
+```
+
