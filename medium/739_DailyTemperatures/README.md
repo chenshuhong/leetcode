@@ -33,3 +33,34 @@ let resultArray = []
 };
 ```
 
+维护一个递减栈来实现
+
+遍历数组，当数组元素小于栈顶时，入栈并记住下标，不然就不断出栈，下标差为我们想要的最小天数
+
+```js
+/**
+ * @param {number[]} T
+ * @return {number[]}
+ */
+var dailyTemperatures = function(T) {
+if (!T[0]){
+    return []
+  }
+  let resultArray = []
+  let stack = new Stack()
+  stack.push([0,T[0]])
+  for (let i=1,length = T.length;i<length;i++){
+    while (!stack.isEmpty()&&T[i]>stack.top()[1]) {
+      let index = stack.pop()[0]
+      resultArray[index] = i-index
+    }
+    stack.push([i,T[i]])
+  }
+  while (!stack.isEmpty()) {
+    let index = stack.pop()[0]
+    resultArray[index] = 0
+  }
+  return resultArray
+};
+```
+

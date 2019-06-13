@@ -1,3 +1,4 @@
+let Stack = require('../../datastruct/Stack')
 /**
  * @param {number[]} T
  * @return {number[]}
@@ -22,7 +23,22 @@ var dailyTemperatures = function(T) {
  * @return {number[]}
  */
 var dailyTemperatures2 = function(T) {
+  if (!T[0]){
+    return []
+  }
   let resultArray = []
-  
+  let stack = new Stack()
+  stack.push([0,T[0]])
+  for (let i=1,length = T.length;i<length;i++){
+    while (!stack.isEmpty()&&T[i]>stack.top()[1]) {
+      let index = stack.pop()[0]
+      resultArray[index] = i-index
+    }
+    stack.push([i,T[i]])
+  }
+  while (!stack.isEmpty()) {
+    let index = stack.pop()[0]
+    resultArray[index] = 0
+  }
   return resultArray
 };
